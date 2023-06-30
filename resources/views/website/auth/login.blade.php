@@ -1,105 +1,64 @@
-
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>Aisin Ticketing Application</title>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
-  <!-- Google Fonts Roboto -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
-  <!-- MDB -->
-  <link rel="stylesheet" href="{{ asset('vendor/mdbootstrap/css/mdb.min.css') }}" />
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="{{ asset('vendor/mdbootstrap/css/style.css') }}" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ env('APP_NAME') }} Sign In Form</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
 </head>
+
 <body>
-  <section class="vh-100">
-    <div class="container-fluid h-custom">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-md-9 col-lg-6 col-xl-5">
-          <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/draw2.png" class="img-fluid"
-          alt="Sample image">
-        </div>
-        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-
-
-          <div class="divider d-flex align-items-center my-4">
-            <p class="text-center fw-bold mx-3 mb-0">Nama Aplikasi</p>
-          </div>
-          <form method="post" action="{{ route('website.auth.authenticate') }}">
-            @csrf
-          <!-- Email input -->
-          @error(['email', 'unauthenticate'])
-          <span class="text-danger">
-            {{ $message }}
-          </span>
-          @enderror
-          <div class="form-outline mb-4">
-            <input type="text"  name="email" id="email"  class="form-control form-control-lg"
-            placeholder="Masukkan 6 digit NPK Anda" />
-            <label class="form-label" for="email">Email</label>
-          </div>
-          
-          <!-- Password input -->
-          @error('password')
-          <span class="text-danger">
-            {{ $message }}
-          </span>
-          @enderror
-          <div class="form-outline mb-3">
-            <input type="password" id="password" name="password" class="form-control form-control-lg"
-            placeholder="Masukkan password" />
-            <label class="form-label" for="password">Password</label>
-          </div>
-
-          <div class="d-flex justify-content-between align-items-center">
-            <!-- Checkbox -->
-            <div class="form-check mb-0">
-              <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-              <label class="form-check-label" for="form2Example3">
-                Ingat Saya
-              </label>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-5">
+                <div class="card">
+                    <div class="card-body p-5">
+                        <h5 class="card-title text-center mb-0">{{ env('APP_NAME') }}</h5>
+                        <h6 class="card-title text-center text-muted mb-4">(Form Izin Membawa Barang Keluar Area AIIA)
+                        </h6>
+                        <hr />
+                        {{-- <h5 class="card-title text-center mb-4">Sign In</h5> --}}
+                        @error('unauthenticate')
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <div>{{ $message }} </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @enderror
+                        <form action="{{ route('website.auth.authenticate') }}" method="post">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="text" class="form-control" id="email" name="email"
+                                    aria-describedby="emailHelp" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="text-center mb-5">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">Masuk
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </button>
+                            </div>
+                            <div class="text-center mt-4">
+                                <hr />
+                                <span class="text-muted fw-lighter">© 2023 ITD Department AIIA. All rights
+                                    reserved.</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <a href="#!" class="text-body">Lupa password?</a>
-          </div>
-
-          <div class="text-center text-lg-start mt-4 pt-2">
-            <button type="submit" class="btn btn-primary btn-lg"
-            style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-            <p class="small fw-bold mt-2 pt-1 mb-0">Belum punya akun? <a href="#!"
-              class="link-danger">Daftar Sekarang</a></p>
-            </div>
-
-          </form>
         </div>
-      </div>
     </div>
-    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-      <!-- Copyright -->
-      <div class="text-white mb-3 mb-md-0">
-        Copyright © 2020. All rights reserved.
-      </div>
-      <!-- Copyright -->
 
-      <!-- Right -->
-      <div>
-        <a href="#!" class="text-white me-4">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="#!" class="text-white me-4">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="#!" class="text-white me-4">
-          <i class="fab fa-google"></i>
-        </a>
-        <a href="#!" class="text-white">
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-      </div>
-      <!-- Right -->
-    </div>
-  </section>
-  <script type="text/javascript" src="{{ asset('vendor/mdbootstrap/js/mdb.min.js') }}"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
+</html>

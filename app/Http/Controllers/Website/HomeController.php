@@ -9,6 +9,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('website.pages.home');
+        return view('website.pages.izin.create');
     }
 }

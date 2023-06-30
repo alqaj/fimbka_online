@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasPermissions;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use HasRoles;
+    use HasRoles, HasPermissions;
 
     /**
      * The attributes that are mass assignable.
@@ -38,4 +39,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function department()
+    {
+        return $this->belongsTo('App\Models\Department', 'department_id', 'id');
+    }
 }
